@@ -77,7 +77,7 @@ void ADS1247::_setPGAandSPS() {
   digitalWrite(_CSpin, LOW);
   SPI.transfer(0x43); //Set SYS0 Register (03h)
   SPI.transfer(0x00);
-  SPI.transfer(0x75); //PGA = 128 & 80SPS
+  SPI.transfer(0x65); //PGA = 128 & 80SPS
   SPI.transfer(0xFF);
   digitalWrite(_CSpin, HIGH);
   SPI.endTransaction();

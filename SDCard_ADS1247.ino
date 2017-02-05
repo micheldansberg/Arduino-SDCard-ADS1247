@@ -18,29 +18,31 @@ int dT = 0;
 
 void setup() {
   //Enable Serial to PC (USB)
-  Serial.begin(9600);
+  /*
+  Serial.begin(115200);
     while (!Serial) {
     ; // wait for serial port to connect. Needed for native USB port only
   }
   Serial.println("start");
+  */
   // initialize SPI
   SPI.begin();
   delay(50);
   
   // see if the SD card is present and can be initialized:
-  Serial.print("Initializing SD card...");
+  //Serial.print("Initializing SD card...");
   if (!SD.begin(SDchipSelect)) {
-    Serial.println("Card failed, or not present");
+    //Serial.println("Card failed, or not present");
     // don't do anything more:
     return;
   } else {
-    Serial.println("card initialized.");
+    //Serial.println("card initialized.");
   }
   
   // define ads1247 communication class, configures SPI connecetion on Arduino.
   // configures ads1247 for gain, SPS, channels and voltage reference
   ads1247.init(DRDYpin, ADS1247CSpin);
-  Serial.println("End init ADS1248");
+  //Serial.println("End init ADS1248");
 }
 
 void loop() {
@@ -53,7 +55,7 @@ void loop() {
   int dT = time - oldTime;
   oldTime = time;
   // Write debugging data to PC
-  writeResultSerial(inputVoltage, dT);
+  //writeResultSerial(inputVoltage, dT);
   
   SPI.beginTransaction(SPISettings(1000000, MSBFIRST, SPI_MODE0));
   File dataFile = SD.open("datalog.txt", FILE_WRITE);
@@ -66,7 +68,7 @@ void loop() {
     dataFile.println(dataString);
     dataFile.close();
     // print to the serial port too:
-    Serial.println(dataString);
+    //Serial.println(dataString);
   }
   // if the file isn't open, pop up an error:
   else {
